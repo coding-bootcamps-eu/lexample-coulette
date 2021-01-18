@@ -49,9 +49,29 @@ changeColor();
 /**
  * Generate color of header
  */
-const button = document.querySelector("button");
-if (button) {
-  button.addEventListener("click", changeColor);
+const generateButton = document.querySelector("#generate");
+if (generateButton) {
+  generateButton.addEventListener("click", changeColor);
 } else {
-  console.error("button was not found.");
+  console.error("button#generate was not found.");
+}
+
+/**
+ * Save currently generate color
+ */
+const saveButton = document.querySelector("#save");
+if (saveButton) {
+  saveButton.addEventListener("click", function () {
+    const colorValueEl = document.querySelector("#colorValue");
+    const color = colorValueEl.innerText;
+    const colorList = document.querySelector("#colors");
+
+    const newColor = document.createElement("li");
+    newColor.innerText = color;
+    newColor.style.backgroundColor = color;
+
+    colorList.appendChild(newColor);
+  });
+} else {
+  console.error("button#save was not found");
 }

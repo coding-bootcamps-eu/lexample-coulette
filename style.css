@@ -21,3 +21,16 @@ header {
 h1 {
   margin: 0;
 }
+
+main {
+  padding: 1rem;
+}
+
+ul {
+  margin: 0;
+  padding-left: 1rem;
+}
+
+li + li {
+  margin-top: 0.5rem;
+}
