@@ -6,6 +6,8 @@ const colors = [];
 // Current generated color
 let currentColor = undefined;
 
+const storageKey = "colors";
+
 /**
  * Generate random number between min and max
  */
@@ -65,6 +67,24 @@ if (generateButton) {
 }
 
 /**
+ * Create item for color in color list
+ */
+function createColorElementInList(color) {
+  const colorList = document.querySelector("#colors");
+
+  const newColor = document.createElement("li");
+  newColor.innerText = color;
+  newColor.style.backgroundColor = color;
+  newColor.setAttribute("data-color", color);
+
+  const deleteButton = document.createElement("button");
+  deleteButton.innerText = "Delete Color";
+
+  newColor.appendChild(deleteButton);
+  colorList.appendChild(newColor);
+}
+
+/**
  * Save currently generate color
  */
 const saveButton = document.querySelector("#save");
@@ -72,22 +92,9 @@ if (saveButton) {
   saveButton.addEventListener("click", function () {
     if (!colors.includes(currentColor)) {
       colors.push(currentColor);
-
-      const colorList = document.querySelector("#colors");
-
-      const newColor = document.createElement("li");
-      newColor.innerText = currentColor;
-      newColor.style.backgroundColor = currentColor;
-      newColor.setAttribute("color", currentColor);
-
-      const deleteButton = document.createElement("button");
-      deleteButton.innerText = "Delete Color";
-
-      newColor.appendChild(deleteButton);
-
-      colorList.appendChild(newColor);
-
+      createColorElementInList(currentColor);
       updateSaveButtonStatus();
+      saveColorsToLocalStorage();
     }
   });
 } else {
@@ -115,7 +122,7 @@ colorList.addEventListener("click", function (e) {
   const tagName = e.target.tagName.toLowerCase();
   if (tagName === "button") {
     const listItem = e.target.parentElement;
-    const color = listItem.getAttribute("color");
+    const color = listItem.getAttribute("data-color");
 
     deleteColorFromArray(color);
     colorList.removeChild(listItem);
@@ -130,4 +137,27 @@ function deleteColorFromArray(color) {
   colors.splice(index, 1);
 
   updateSaveButtonStatus();
+  saveColorsToLocalStorage();
 }
+
+/**
+ * Save currently saved colors to local storage
+ */
+function saveColorsToLocalStorage() {
+  const jsonColors = JSON.stringify(colors);
+  localStorage.setItem(storageKey, jsonColors);
+}
+
+function readColorsFromLocalStorage() {
+  const storageColors = localStorage.getItem(storageKey);
+  if (storageColors !== null) {
+    const _colors = JSON.parse(storageColors);
+    _colors.forEach((color) => {
+      createColorElementInList(color);
+      colors.push(color);
+    });
+  }
+}
+
+// initially read colors from local storage
+readColorsFromLocalStorage();
