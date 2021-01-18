@@ -47,6 +47,8 @@ function changeColor() {
 
   const body = document.querySelector("header");
   body.style.backgroundColor = currentColor;
+
+  updateSaveButtonStatus();
 }
 
 // initially change color of header
@@ -78,8 +80,23 @@ if (saveButton) {
       newColor.style.backgroundColor = currentColor;
 
       colorList.appendChild(newColor);
+
+      updateSaveButtonStatus();
     }
   });
 } else {
   console.error("button#save was not found");
+}
+
+/**
+ * Updates save button status based on saved colors
+ * and currently generated color
+ */
+function updateSaveButtonStatus() {
+  const saveButton = document.querySelector("#save");
+  if (colors.includes(currentColor)) {
+    saveButton.setAttribute("disabled", "");
+  } else {
+    saveButton.removeAttribute("disabled");
+  }
 }
