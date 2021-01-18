@@ -1,5 +1,11 @@
 console.log("welcome to coulette 🎨");
 
+// Saved colors of coulette
+const colors = [];
+
+// Current generated color
+let currentColor = undefined;
+
 /**
  * Generate random number between min and max
  */
@@ -34,13 +40,13 @@ function randomHexColor() {
  * Generate random color and change color of header
  */
 function changeColor() {
-  const color = randomHexColor();
+  currentColor = randomHexColor();
 
   const colorValueEl = document.querySelector("#color-value");
-  colorValueEl.textContent = color;
+  colorValueEl.textContent = currentColor;
 
   const body = document.querySelector("header");
-  body.style.backgroundColor = color;
+  body.style.backgroundColor = currentColor;
 }
 
 // initially change color of header
@@ -62,15 +68,17 @@ if (generateButton) {
 const saveButton = document.querySelector("#save");
 if (saveButton) {
   saveButton.addEventListener("click", function () {
-    const colorValueEl = document.querySelector("#colorValue");
-    const color = colorValueEl.innerText;
-    const colorList = document.querySelector("#colors");
+    if (!colors.includes(currentColor)) {
+      colors.push(currentColor);
 
-    const newColor = document.createElement("li");
-    newColor.innerText = color;
-    newColor.style.backgroundColor = color;
+      const colorList = document.querySelector("#colors");
 
-    colorList.appendChild(newColor);
+      const newColor = document.createElement("li");
+      newColor.innerText = currentColor;
+      newColor.style.backgroundColor = currentColor;
+
+      colorList.appendChild(newColor);
+    }
   });
 } else {
   console.error("button#save was not found");
