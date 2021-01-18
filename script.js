@@ -78,6 +78,12 @@ if (saveButton) {
       const newColor = document.createElement("li");
       newColor.innerText = currentColor;
       newColor.style.backgroundColor = currentColor;
+      newColor.setAttribute("color", currentColor);
+
+      const deleteButton = document.createElement("button");
+      deleteButton.innerText = "Delete Color";
+
+      newColor.appendChild(deleteButton);
 
       colorList.appendChild(newColor);
 
@@ -99,4 +105,29 @@ function updateSaveButtonStatus() {
   } else {
     saveButton.removeAttribute("disabled");
   }
+}
+
+/**
+ * Delete color from color list
+ */
+const colorList = document.querySelector("#colors");
+colorList.addEventListener("click", function (e) {
+  const tagName = e.target.tagName.toLowerCase();
+  if (tagName === "button") {
+    const listItem = e.target.parentElement;
+    const color = listItem.getAttribute("color");
+
+    deleteColorFromArray(color);
+    colorList.removeChild(listItem);
+  }
+});
+
+/**
+ * Delete color from colors array
+ */
+function deleteColorFromArray(color) {
+  const index = colors.indexOf(color);
+  colors.splice(index, 1);
+
+  updateSaveButtonStatus();
 }
