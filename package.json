@@ -1,0 +1,23 @@
+{
+  "name": "lexample-coulette",
+  "version": "1.0.0",
+  "description": "Example solution for the \"First JavaScript Web App\" lecture.",
+  "scripts": {
+    "serve": "serve src",
+    "e2e": "cypress open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coding-bootcamps-eu/lexample-coulette.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/coding-bootcamps-eu/lexample-coulette/issues"
+  },
+  "homepage": "https://github.com/coding-bootcamps-eu/lexample-coulette#readme",
+  "devDependencies": {
+    "cypress": "^7.2.0"
+  }
+}
