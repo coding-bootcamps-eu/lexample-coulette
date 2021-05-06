@@ -11,7 +11,7 @@ const storageKey = "colors";
 /**
  * Generate random number between min and max
  */
-function randomNumber(min, max) {
+export function randomNumber(min, max) {
   const num = Math.random() * (max - min + 1) + min;
   return Math.floor(num);
 }
@@ -143,12 +143,12 @@ function deleteColorFromArray(color) {
 /**
  * Save currently saved colors to local storage
  */
-function saveColorsToLocalStorage() {
+export function saveColorsToLocalStorage() {
   const jsonColors = JSON.stringify(colors);
   localStorage.setItem(storageKey, jsonColors);
 }
 
-function readColorsFromLocalStorage() {
+export function readColorsFromLocalStorage() {
   const storageColors = localStorage.getItem(storageKey);
   if (storageColors !== null) {
     const _colors = JSON.parse(storageColors);

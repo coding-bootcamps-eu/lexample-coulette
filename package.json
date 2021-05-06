@@ -4,7 +4,10 @@
   "description": "Example solution for the \"First JavaScript Web App\" lecture.",
   "scripts": {
     "serve": "serve src",
-    "e2e": "cypress open"
+    "test": "npm run test:unit && npm run test:e2e:ci",
+    "test:e2e": "cypress open",
+    "test:e2e:ci": "cypress run",
+    "test:unit": "jest"
   },
   "repository": {
     "type": "git",
@@ -18,6 +21,9 @@
   },
   "homepage": "https://github.com/coding-bootcamps-eu/lexample-coulette#readme",
   "devDependencies": {
-    "cypress": "^7.2.0"
-  }
+    "cypress": "^7.2.0",
+    "esm": "^3.2.25",
+    "jest": "^26.6.3"
+  },
+  "dependencies": {}
 }
